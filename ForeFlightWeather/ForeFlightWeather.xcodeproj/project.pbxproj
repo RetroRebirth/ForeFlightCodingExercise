@@ -484,6 +484,7 @@
 				837707AB2BCD8B02006EB931 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		837707AC2BCD8B02006EB931 /* Build configuration list for PBXNativeTarget "ForeFlightWeatherTests" */ = {
 			isa = XCConfigurationList;
@@ -492,6 +493,7 @@
 				837707AE2BCD8B02006EB931 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		837707AF2BCD8B02006EB931 /* Build configuration list for PBXNativeTarget "ForeFlightWeatherUITests" */ = {
 			isa = XCConfigurationList;
@@ -500,6 +502,7 @@
 				837707B12BCD8B02006EB931 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
