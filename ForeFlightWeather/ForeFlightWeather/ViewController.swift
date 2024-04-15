@@ -6,80 +6,109 @@
 //  Copyright © 2024 chris. All rights reserved.
 //
 
+import Foundation
 import UIKit
 
-class ViewController: UIViewController, UISearchBarDelegate {
+class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var airportSearchBar: UISearchBar!
+    @IBOutlet weak var airportTableView: UITableView!
     
+    var searchActive : Bool = false
     var data = ["KPWM","KAUS"]
+    var filtered:[String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        airportSearchBar.text = data[0]
+        
+        /* Setup delegates */
+        airportTableView.delegate = self
+        airportTableView.dataSource = self
         airportSearchBar.delegate = self
+        
+        callAPI()
+        
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-    // MARK:UISearchBarDelegate
     
-//    // Managing the search text
-//    
-//    func searchBar(searchBar: UISearchBar, textDidChange: String) {
-//        // TODO
-//    }
-//
-//    func searchBar(searchBar: UISearchBar, shouldChangeTextIn: NSRange, replacementText: String) -> Bool {
-//        // TODO
-//        return false
-//    }
-//    
-//    func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
-//        // TODO
-//        return false
-//    }
-//    
-//    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
-//        // TODO
-//    }
-//    
-//    func searchBarShouldEndEditing(searchBar: UISearchBar) -> Bool {
-//        // TODO
-//        return false
-//    }
-//    
-//    func searchBarTextDidEndEditing(searchBar: UISearchBar) {
-//        // TODO
-//    }
-//    
-//    // Responding to clicks in search controls
-//    
-//    func searchBarBookmarkButtonClicked(searchBar: UISearchBar) {
-//        // TODO
-//    }
-//    
-//    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
-//        // TODO
-//    }
+    // MARK: UISearchBarDelegate
     
-    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-        // TODO
-        print(searchBar.text)
+    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+        searchActive = true;
     }
     
-//    func searchBarResultsListButtonClicked(searchBar: UISearchBar) {
-//        // TODO
-//    }
-//    
-//    // Responding to scope button changes
-//    
-//    func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange: Int) {
-//        // TODO
-//    }
+    func searchBarTextDidEndEditing(searchBar: UISearchBar) {
+        searchActive = false;
+    }
+    
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        searchActive = false;
+    }
+    
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        searchActive = false;
+    }
+    
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        filtered = data.filter({ (text) -> Bool in
+            let tmp: NSString = text
+            let range = tmp.rangeOfString(searchText, options: NSStringCompareOptions.CaseInsensitiveSearch)
+            return range.location != NSNotFound
+        })
+        if(filtered.count == 0){
+            searchActive = false;
+        } else {
+            searchActive = true;
+        }
+        self.airportTableView.reloadData()
+    }
+    
+    // MARK: UITableViewDataSource, UITableViewDelegate
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if(searchActive) {
+            return filtered.count
+        }
+        return data.count;
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell")! as UITableViewCell;
+        if(searchActive){
+            cell.textLabel?.text = filtered[indexPath.row]
+        } else {
+            cell.textLabel?.text = data[indexPath.row];
+        }
+        
+        return cell;
+    }
+    
+    // MARK: URLSession
+    
+    func callAPI(){
+        guard let url = NSURL(string: "https://qa.foreflight.com/weather/report/kpwm") else{
+            return
+        }
+        let urlRequest = NSMutableURLRequest(URL: url)
+        urlRequest.addValue("1", forHTTPHeaderField: "ff-coding-exercise")
+        
+        let task = NSURLSession.sharedSession().dataTaskWithRequest(urlRequest){
+            data, response, error in
+        
+            if let data = data, let string = String(data: data, encoding: NSUTF8StringEncoding){
+                print(string)
+            }
+        }
+        
+        task.resume()
+    }
 }
 
