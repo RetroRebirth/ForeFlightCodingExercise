@@ -35,21 +35,32 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="jSS-5l-voS">
+                                <rect key="frame" x="0.0" y="180" width="600" height="420"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="jSS-5l-voS" secondAttribute="bottom" id="C4u-Tg-0Z9"/>
                             <constraint firstItem="UrE-kv-m5H" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Eme-R3-2TZ"/>
+                            <constraint firstItem="jSS-5l-voS" firstAttribute="top" secondItem="cdZ-xX-uX6" secondAttribute="bottom" constant="8" id="J5n-Mu-1d6"/>
                             <constraint firstItem="cdZ-xX-uX6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Ndq-oU-3bt"/>
                             <constraint firstItem="cdZ-xX-uX6" firstAttribute="top" secondItem="UrE-kv-m5H" secondAttribute="bottom" id="cL4-Yc-ceF"/>
                             <constraint firstItem="UrE-kv-m5H" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="g6o-vl-Fb7"/>
                             <constraint firstItem="UrE-kv-m5H" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="iTG-d4-fYH"/>
                             <constraint firstItem="cdZ-xX-uX6" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="qmK-kV-5Ub"/>
+                            <constraint firstItem="jSS-5l-voS" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="vxx-GR-G3A"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="airportSearchBar" destination="UrE-kv-m5H" id="9ra-Ih-cqY"/>
                         <outlet property="airportTableView" destination="cdZ-xX-uX6" id="2j7-jZ-6CH"/>
                         <outlet property="searchDisplayController" destination="bbK-cq-Fyu" id="TqC-ra-mUs"/>
+                        <outlet property="weatherTextView" destination="jSS-5l-voS" id="U7k-g5-dx9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

@@ -13,10 +13,13 @@ class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSour
     
     @IBOutlet weak var airportSearchBar: UISearchBar!
     @IBOutlet weak var airportTableView: UITableView!
+    @IBOutlet weak var weatherTextView: UITextView!
     
     var searchActive : Bool = false
     var data = ["KPWM","KAUS"]
     var filtered:[String] = []
+    
+    var weatherString:String = "testing this view"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,13 +29,17 @@ class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSour
         airportTableView.dataSource = self
         airportSearchBar.delegate = self
         
-        callAPI()
-        
+        parseWeather()
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func updateUIs() {
+        airportSearchBar.text = data[0];
+        weatherTextView.text = weatherString
     }
     
     // MARK: UISearchBarDelegate
@@ -51,6 +58,8 @@ class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSour
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         searchActive = false;
+        
+        updateUIs()
     }
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
@@ -91,10 +100,10 @@ class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSour
         return cell;
     }
     
-    // MARK: URLSession
+    // MARK: NSURLSession
     
-    func callAPI(){
-        guard let url = NSURL(string: "https://qa.foreflight.com/weather/report/kpwm") else{
+    func parseWeather(){
+        guard let url = NSURL(string: "https://qa.foreflight.com/weather/report/KPWM") else{
             return
         }
         let urlRequest = NSMutableURLRequest(URL: url)
@@ -105,6 +114,8 @@ class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSour
         
             if let data = data, let string = String(data: data, encoding: NSUTF8StringEncoding){
                 print(string)
+                self.weatherString = string
+//                self.updateUIs()
             }
         }
         
