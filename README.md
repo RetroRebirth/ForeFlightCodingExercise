@@ -23,9 +23,18 @@ Tutorial referenced to generate a search bar and table view with filtering searc
 
 Apple docs referenced for better understanding `UISearchBar` and table views.
 
+### https://developer.apple.com/documentation/foundation/nsmutableurlrequest
+
+Apple docs for generating a URL request pre Swift 3.
+
+### https://stackoverflow.com/questions/28302019/getting-a-this-application-is-modifying-the-autolayout-engine-from-a-background
+
+Stackoverflow for dispatching to main queue for updating UI in pre Swift 3
+
 ## Known issues
 
 - Refactor `UISearchBarDelegate`, `UITableViewDataSource`, and `UITableViewDelegate` methods to separate files.
+- Selecting an airport from the table does nothing.
 
 ## Any other notes that will help us understand your project
 
