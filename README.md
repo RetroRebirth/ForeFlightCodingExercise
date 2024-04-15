@@ -19,6 +19,10 @@ Used to produce the .gitignore file.
 
 Tutorial referenced to generate a search bar and table view with filtering search.
 
+### https://developer.apple.com/documentation/uikit/uisearchbar & https://developer.apple.com/documentation/uikit/views_and_controls/table_views
+
+Apple docs referenced for better understanding `UISearchBar` and table views.
+
 ## Known issues
 
 - Refactor `UISearchBarDelegate`, `UITableViewDataSource`, and `UITableViewDelegate` methods to separate files.
