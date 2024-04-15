@@ -15,9 +15,13 @@ TODO
 
 Used to produce the .gitignore file.
 
+### https://www.shrikar.com/blog/swift-ios-tutorial-uisearchbar-and-uisearchbardelegate
+
+Tutorial referenced to generate a search bar and table view with filtering search.
+
 ## Known issues
 
-- Refactor `UISearchBarDelegate` methods to separate file.
+- Refactor `UISearchBarDelegate`, `UITableViewDataSource`, and `UITableViewDelegate` methods to separate files.
 
 ## Any other notes that will help us understand your project
 
