@@ -1,6 +1,8 @@
 # ForeFlightCodingExercise
 An iOS app that fetches and displays the weather report for a given airport from ForeFlight's QA server.
 
+![alt text](screenshot.png)
+
 ## How long was spent on the project
 
 Started 9:00am Monday April 15th. Setting up my dev environment including installing OS X Yosemite v10.10.15 and Xcode v7.2 took until 10:30am.
