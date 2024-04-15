@@ -11,7 +11,9 @@ TODO
 
 ## Any references consulted and/or third party libraries used
 
-TODO
+### https://www.toptal.com/developers/gitignore/
+
+Used to produce the .gitignore file.
 
 ## Known issues
 
