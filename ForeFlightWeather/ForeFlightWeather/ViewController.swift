@@ -15,16 +15,16 @@ class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSour
     @IBOutlet weak var airportTableView: UITableView!
     @IBOutlet weak var weatherTextView: UITextView!
     
-    var searchActive:Bool = false
     var airports:[String] = ["KPWM","KAUS"]
-    var filtered:[String] = []
-    
-    var weatherString:String = "testing this view"
+    var selectedAirport:String = ""
+    var weatherString:String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        airportSearchBar.text = airports[0]
+        selectedAirport = airports[0]
+        
+        airportSearchBar.text = selectedAirport
         airportSearchBar.delegate = self
         
         airportTableView.delegate = self
@@ -41,41 +41,21 @@ class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSour
     }
     
     func updateUIs() {
+        airportSearchBar.text = selectedAirport
+        airportTableView.reloadData()
         weatherTextView.text = weatherString
     }
     
     // MARK: UISearchBarDelegate
     
-    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
-        searchActive = true;
-    }
-    
-    func searchBarTextDidEndEditing(searchBar: UISearchBar) {
-        searchActive = false;
-    }
-    
-    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
-        searchActive = false;
-    }
-    
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-        searchActive = false;
+        selectedAirport = airportSearchBar.text!
+        
+        if !airports.contains(selectedAirport) {
+            airports.insert(selectedAirport, atIndex: 0)
+        }
         
         parseWeather()
-    }
-    
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        filtered = airports.filter({ (text) -> Bool in
-            let tmp: NSString = text
-            let range = tmp.rangeOfString(searchText, options: NSStringCompareOptions.CaseInsensitiveSearch)
-            return range.location != NSNotFound
-        })
-        if(filtered.count == 0){
-            searchActive = false;
-        } else {
-            searchActive = true;
-        }
-        self.airportTableView.reloadData()
     }
     
     // MARK: UITableViewDataSource, UITableViewDelegate
@@ -85,19 +65,12 @@ class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSour
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if(searchActive) {
-            return filtered.count
-        }
         return airports.count;
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell")! as UITableViewCell;
-        if(searchActive){
-            cell.textLabel?.text = filtered[indexPath.row]
-        } else {
-            cell.textLabel?.text = airports[indexPath.row];
-        }
+        cell.textLabel?.text = airports[indexPath.row];
         
         return cell;
     }
@@ -105,7 +78,7 @@ class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSour
     // MARK: NSURLSession
     
     func parseWeather(){
-        guard let url = NSURL(string: "https://qa.foreflight.com/weather/report/"+self.airportSearchBar.text!) else{
+        guard let url = NSURL(string: "https://qa.foreflight.com/weather/report/"+selectedAirport) else{
             return
         }
         let urlRequest = NSMutableURLRequest(URL: url)
@@ -116,7 +89,6 @@ class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSour
             data, response, error in
         
             if let data = data, let string = String(data: data, encoding: NSUTF8StringEncoding){
-                print(string)
                 self.weatherString = string
                 dispatch_async(dispatch_get_main_queue(), {
                     self.updateUIs()
