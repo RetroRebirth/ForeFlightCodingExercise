@@ -17,20 +17,32 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="test" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iwu-9B-MXm">
-                                <rect key="frame" x="252" y="285" width="97" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="UrE-kv-m5H">
+                                <rect key="frame" x="0.0" y="278" width="600" height="44"/>
                                 <textInputTraits key="textInputTraits"/>
-                            </textField>
+                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="iwu-9B-MXm" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="9MW-mj-gyH"/>
-                            <constraint firstItem="iwu-9B-MXm" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="zhl-1S-oPq"/>
+                            <constraint firstItem="UrE-kv-m5H" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Eme-R3-2TZ"/>
+                            <constraint firstItem="UrE-kv-m5H" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="TD8-Am-QE7"/>
+                            <constraint firstItem="UrE-kv-m5H" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="g6o-vl-Fb7"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="airportSearchBar" destination="UrE-kv-m5H" id="9ra-Ih-cqY"/>
+                        <outlet property="searchDisplayController" destination="bbK-cq-Fyu" id="TqC-ra-mUs"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="bbK-cq-Fyu">
+                    <connections>
+                        <outlet property="delegate" destination="BYZ-38-t0r" id="KNU-eM-paW"/>
+                        <outlet property="searchContentsController" destination="BYZ-38-t0r" id="ZSa-zX-GNa"/>
+                        <outlet property="searchResultsDataSource" destination="BYZ-38-t0r" id="ttz-JF-h7a"/>
+                        <outlet property="searchResultsDelegate" destination="BYZ-38-t0r" id="Gef-rZ-AiT"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
         </scene>
     </scenes>
