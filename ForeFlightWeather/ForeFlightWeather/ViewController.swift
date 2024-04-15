@@ -88,12 +88,14 @@ class ViewController: UIViewController, UISearchBarDelegate, UITableViewDataSour
         let task = NSURLSession.sharedSession().dataTaskWithRequest(urlRequest){
             data, response, error in
         
-            if let data = data, let string = String(data: data, encoding: NSUTF8StringEncoding){
-                self.weatherString = string
-                dispatch_async(dispatch_get_main_queue(), {
-                    self.updateUIs()
-                })
+            guard let data = data, let string = String(data: data, encoding: NSUTF8StringEncoding) else {
+                return
             }
+            
+            self.weatherString = string
+            dispatch_async(dispatch_get_main_queue(), {
+                self.updateUIs()
+            })
         }
         
         task.resume()
