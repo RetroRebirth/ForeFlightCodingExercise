@@ -17,7 +17,7 @@ Used to produce the .gitignore file.
 
 ## Known issues
 
-TODO
+- Refactor `UISearchBarDelegate` methods to separate file.
 
 ## Any other notes that will help us understand your project
 
