@@ -9,7 +9,7 @@ Started 9:00am Monday April 15th. Setting up my dev environment including instal
 
 ## Any notable design decisions you wish to highlight
 
-I kept the UI very basic as I developed comprised of the following in top-to-bottom order:
+I kept the UI very basic as I developed the following in top-to-bottom order:
 - Search Bar: An affordance for the user to search for particular airports.
 - Table View: A collection of the user's searches, keeping the most recent at the top.
 - Text View: The JSON returned from calling upon "https://qa.foreflight.com/weather/report/" with the user defined airport from the search bar.
